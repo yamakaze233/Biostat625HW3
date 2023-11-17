@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # MLRANOVA
 
 The 'MLRANOVA' package provides functions for performing multivariate linear regression and analysis of variance (ANOVA).
@@ -46,3 +47,6 @@ This package is released under the MIT License. See the LICENSE file for more de
 For questions and support, please open an issue in the [GitHub issue tracker](https://github.com/yamakaze233/Biostat625HW3/MLRANOVA/issues).
 
 
+=======
+# Biostat625HW3
+>>>>>>> 71410e279c2503cc307d480e81a0d26cecc22c7c
