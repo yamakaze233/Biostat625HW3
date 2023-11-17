@@ -22,7 +22,7 @@ jobs:
           apt-get install -y libxt6 libxrender1 libxext-dev libgl1-mesa-dev libglu1-mesa-dev
       - name: Build and check package
         run: |
-          xvfb-run --auto-servernum R CMD build . --no-manual --no-resave-data
+          xvfb-run --auto-servernum R CMD build . --no-manual --no-resave-data --no-build-vignettes
           xvfb-run --auto-servernum R CMD check *tar.gz --no-manual
       - name: Build and check package
         run: |
