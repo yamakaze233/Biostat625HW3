@@ -11,6 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     container: rocker/r-ver:4.2.0
     steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          install.packages(c("remotes", "testthat"))
+          remotes::install_cran("covr")
+      - name: Run tests
+        run: R CMD check *tar.gz --no-manual
       - name: Test coverage
         run: R -e 'covr::codecov(token = Sys.getenv("CODECOV_TOKEN"))'
         env:
