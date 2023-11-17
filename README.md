@@ -37,13 +37,13 @@ Conduct ANOVA tests on linear regression models.
 Utilize efficient C++ implementations for core calculations.
 
 ## Contributing
-Contributions to MLRANOVA are welcome! Feel free to open an issue or submit a pull request on [GitHub](https://github.com/yamakaze233/Biostat625HW3/MLRANOVA).
+Contributions to MLRANOVA are welcome! Feel free to open an issue or submit a pull request on [GitHub](https://github.com/yamakaze233/Biostat625HW3).
 
 ## License
 This package is released under the MIT License. See the LICENSE file for more details.
 
 ## Getting Help
-For questions and support, please open an issue in the [GitHub issue tracker](https://github.com/yamakaze233/Biostat625HW3/MLRANOVA/issues).
+For questions and support, please open an issue in the [GitHub issue tracker](https://github.com/yamakaze233/Biostat625HW3/issues).
 
 
 # Biostat625HW3
