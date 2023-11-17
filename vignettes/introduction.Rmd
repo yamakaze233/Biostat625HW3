@@ -1,0 +1,100 @@
+---
+title: "Introduction to MLRANOVA"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(MLRANOVA)
+library(bench)
+```
+## Introduction
+The '**MLRANOVA**' package provides functions for performing multivariate linear regression and analysis of variance (ANOVA). This vignette will guide you through using the main functionalities of the package.
+
+## Multivariate Linear Regression
+Multivariate linear regression is a statistical technique used to model the relationship between two or more predictor variables and a response variable by fitting a linear equation to the observed data.
+
+### Example
+The following example demonstrates how to perform multivariate linear regression with the '**multivariate_linear_regression**' function.
+
+```{r}
+# Simulate some data
+set.seed(625)
+X <- matrix(rnorm(500), ncol = 5)
+Y <- X %*% c(1, 2, 3, 4, 5) + rnorm(100)
+
+# Perform multivariate linear regression
+model <- multivariate_linear_regression(X, Y)
+
+# Display the coefficients of the model
+print(model$coefficients)
+
+# Comparison against the original R function 'lm' 
+originallm <- lm(Y~X)
+all.equal(as.numeric(originallm$coefficients), as.numeric(model$coefficients))
+```
+
+## ANOVA for Linear Regression Models
+After fitting a linear regression model, it is common to perform ANOVA to understand the variation explained by the model compared to the total variation.
+
+### Example
+Using the model we fitted earlier, we can perform an ANOVA to test the overall significance of the model.
+
+```{r, eval = FALSE}
+# Perform ANOVA on the linear regression model
+anova_result <- anova_linear_regression(model, X, Y)
+
+# Display the ANOVA table
+print(anova_result)
+
+# Formatting to make comparison
+original_anova <- as.data.frame(anova(originallm))
+formatted_anova_result <- anova_result[1:2, c("Df", "Sum.Sq", "Mean.Sq", "F.value")]
+
+# Rename columns to match
+names(formatted_anova_result) <- names(original_anova)[1:4]
+
+# Perform the comparison
+comparison <- all.equal(original_anova[1:4], formatted_anova_result, tolerance = 1e-5, check.attributes = FALSE)
+
+# Display the comparison result
+print(comparison)
+```
+
+## Benchmarking
+
+```{r}
+# Benchmarking
+benchmark_results <- bench::mark(
+  "Original lm and ANOVA" = {
+    originallm <- lm(Y~X)
+    anova(originallm)
+  },
+  "MLRANOVA" = {
+    model <- multivariate_linear_regression(X, Y)
+    anova_linear_regression(model, X, Y)
+  },
+  iterations = 10,
+  check = FALSE
+)
+
+# View the results
+benchmark_results
+```
+
+## Summary
+The '**MLRANOVA**' package simplifies the process of performing multivariate linear regression and subsequent ANOVA analysis. With just a few lines of code, you can fit models and evaluate their significance.
+
+For more information on each function and additional options, please refer to the function documentation using the '?' operator in R (e.g., '**?multivariate_linear_regression**').
+
+

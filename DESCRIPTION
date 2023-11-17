@@ -1,0 +1,22 @@
+Package: MLRANOVA
+Title: Multivariate Linear Regression & ANOVA
+Version: 0.0.0.9000
+Authors@R: 
+    person("Xiaolong", "Wang", , "ssbbcc@umich.edu", role = c("aut", "cre"))
+Description: The 'MLRANOVA' package provides functions for performing multivariate linear regression and analysis of variance (ANOVA).
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Imports:
+    Rcpp,
+    stats,
+    bench
+LinkingTo:
+    Rcpp
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Config/testthat/edition: 3
