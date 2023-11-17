@@ -1,0 +1,26 @@
+name: R CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: rocker/r-ver:4.0.0
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          R -e 'install.packages(c("remotes", "testthat", "covr"))'
+          R -e 'remotes::install_deps(dependencies = TRUE)'
+      - name: Check package
+        run: R CMD build . --no-manual --no-resave-data
+      - name: Run tests
+        run: R CMD check *tar.gz --no-manual
+      - name: Test coverage
+        run: R -e 'covr::codecov(token = Sys.getenv("CODECOV_TOKEN"))'
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV }}
